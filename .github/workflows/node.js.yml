@@ -33,7 +33,6 @@ jobs:
   # This will post to an endpoint in the future.
   run_publish:
     runs-on: ubuntu-latest
-    needs: run_tests
     steps:
-    - run: echo ${{needs.build.outputs.success}} ${{needs.build.outputs.error}}
+    - run: echo ${{build.outputs.success}} ${{build.outputs.error}}
 
