@@ -217,7 +217,7 @@ function observeConsoleLogging() {
 beforeAll( async () => {
 	capturePageEventsForTearDown();
 	enablePageDialogAccept();
-	//observeConsoleLogging();
+	observeConsoleLogging();
 
 	await trashExistingPosts();
 	await setupBrowser();

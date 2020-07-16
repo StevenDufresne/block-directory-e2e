@@ -35,24 +35,22 @@ const urlMatch = ( url ) => {
 	return url.indexOf( urlPart ) >= 0 || url.indexOf( encoded ) >= 0;
 };
 
-
 const { searchTerm } = github.context.payload.client_payload;
 
-core.info(`
+core.info( `
 --------------------------------------------------------------
-Running Tests for "${searchTerm}"
+Running Tests for "${ searchTerm }"
 --------------------------------------------------------------
-`);
+` );
 
 describe( `Block Directory Tests`, () => {
 	beforeEach( async () => {
 		await createNewPost();
 		await removeAllBlocks();
-    } );
+	} );
 
-    it( 'Block returns from API and installs', async () => {
+	it( 'Block returns from API and installs', async () => {
 		try {
-
 			await searchForBlock( searchTerm );
 
 			const finalResponse = await page.waitForResponse(
@@ -66,20 +64,20 @@ describe( `Block Directory Tests`, () => {
 
 			runTest( () => {
 				expect( Array.isArray( resp ) ).toBeTruthy();
-			}, `The search result for "${searchTerm}" isn't an array.` );
+			}, `The search result for "${ searchTerm }" isn't an array.` );
 
 			runTest( () => {
 				expect( resp.length ).toBeLessThan( 2 );
-			}, `We found multiple blocks for "${searchTerm}".` );
+			}, `We found multiple blocks for "${ searchTerm }".` );
 
 			runTest( () => {
 				expect( resp ).toHaveLength( 1 );
-			}, `We found no matching blocks for "${searchTerm}" in the directory.` );
+			}, `We found no matching blocks for "${ searchTerm }" in the directory.` );
 
 			let addBtn = await page.waitForSelector(
 				'.block-directory-downloadable-blocks-list li:first-child button'
 			);
-   
+
 			// Add the block
 			await addBtn.click();
 
@@ -89,14 +87,14 @@ describe( `Block Directory Tests`, () => {
 
 			runTest( () => {
 				expect( blocks.length ).toBeGreaterThan( 0 );
-            }, `Couldn't install "${searchTerm}".` );
+			}, `Couldn't install "${ searchTerm }".` );
 
-            core.setOutput( 'success', true )
+			core.setOutput( 'success', true );
 		} catch ( e ) {
-            core.setFailed( e );
-            core.setOutput( 'error', e )
-            core.setOutput( 'success', false )
-            throw new Error();
+			core.setFailed( e );
+			core.setOutput( 'error', e );
+			core.setOutput( 'success', false );
+			throw new Error();
 		}
 	} );
 } );
