@@ -31,8 +31,3 @@ jobs:
       run: npm run test:e2e
 
   # This will post to an endpoint in the future.
-  run_publish:
-    runs-on: ubuntu-latest
-    steps:
-    - run: echo ${{build.outputs.success}} ${{build.outputs.error}}
-
