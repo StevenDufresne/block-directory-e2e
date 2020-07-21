@@ -12,7 +12,6 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.test }}
       output2: ${{ steps.step2.outputs.test }}
-      output3: $GITHUB_RUN_ID
     steps:
     - id: step1
       run: echo "::set-output name=test::hello"
