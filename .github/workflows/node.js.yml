@@ -15,7 +15,9 @@ jobs:
       success: ${{ steps.testRunDirectory.outputs.success }}
       error: ${{ steps.testRunDirectory.outputs.error }}
     steps:
-    - name: Print Github
-      run: echo ${{ toJson(github) }}
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
   # This will post to an endpoint in the future.
