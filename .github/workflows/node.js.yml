@@ -16,6 +16,6 @@ jobs:
       error: ${{ steps.testRunDirectory.outputs.error }}
     steps:
     - name: Print Github
-      run: echo ${{ JSON.stringify(github) }}
+      run: echo ${{ toJson(github) }}
 
   # This will post to an endpoint in the future.
