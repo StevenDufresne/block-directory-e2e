@@ -23,5 +23,5 @@ jobs:
     needs: job1
     steps:
     - run: echo $POST_PAYLOAD
-     env: 
-       POST_PAYLOAD: ${{ toJSON( needs.run_tests.outputs ) }}
+      env: 
+        POST_PAYLOAD: ${{ toJSON( needs.run_tests.outputs ) }}
