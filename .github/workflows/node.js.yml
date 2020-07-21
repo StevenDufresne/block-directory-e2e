@@ -15,19 +15,7 @@ jobs:
       success: ${{ steps.testRunDirectory.outputs.success }}
       error: ${{ steps.testRunDirectory.outputs.error }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install Block Testing Framework
-      run: npm ci
-    - name: Configure & Start Environment
-      run: npm run wp-env start
-    - name: Modify plugins folder permissions
-      run: docker exec -t $( docker ps -qf "name=tests" ) chmod -R 767 /var/www/html/wp-content
-    - name: Run End to End Tests
-      id: testRunDirectory
-      run: npm run test:e2e
+    - name: Print Github
+      run: echo ${{ github }}
 
   # This will post to an endpoint in the future.
