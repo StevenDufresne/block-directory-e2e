@@ -16,8 +16,5 @@ jobs:
       error: ${{ steps.testRunDirectory.outputs.error }}
     steps:
       - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
+        run: echo $GITHUB_RUN_ID $GITHUB_RUN_NUMBER
   # This will post to an endpoint in the future.
